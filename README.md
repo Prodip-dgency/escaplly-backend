@@ -1,2 +1,3 @@
 # escaplly-backend
-escaplly_backend
+The project for escaplly backend
+Prodip just joined.
