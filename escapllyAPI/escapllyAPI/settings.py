@@ -11,21 +11,32 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Dynamic fields
+secret_key = os.environ.get('SECRET_KEY')
+allowed_hosts = os.environ.get('ALLOWED_HOST')
+db_name = os.environ.get('DATABASE_NAME')
+db_user = os.environ.get('DATABASE_USER')
+db_pass = os.environ.get('DATABASE_PASSWORD')
+db_host = os.environ.get('DATABASE_HOST')
+db_port = os.environ.get('DATABASE_PORT')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m=)&7*=2*3!*a-!@dx33-y7u8^43kh(nv-j&l!a#--mk%@g9_+'
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [allowed_hosts]
 
 
 # Application definition
@@ -37,6 +48,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #Third Party Pacakages
+    'rest_framework',
+    'corsheaders'
+
+
+
+    #My applications
+
 ]
 
 MIDDLEWARE = [
@@ -75,8 +95,12 @@ WSGI_APPLICATION = 'escapllyAPI.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': db_name,
+        'USER': db_user,
+        'PASSWORD': db_pass,
+        'HOST': db_host,
+        'PORT': db_port
     }
 }
 
