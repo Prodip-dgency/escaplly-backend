@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Dynamic fields
 secret_key = os.environ.get('SECRET_KEY')
-allowed_hosts = os.environ.get('ALLOWED_HOST')
+allowed_hosts = os.environ.get('ALLOWED_HOSTS')
 db_name = os.environ.get('DATABASE_NAME')
 db_user = os.environ.get('DATABASE_USER')
 db_pass = os.environ.get('DATABASE_PASSWORD')
@@ -36,7 +36,7 @@ SECRET_KEY = secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [allowed_hosts]
+ALLOWED_HOSTS = [allowed_hosts, 'localhost']
 
 
 # Application definition
