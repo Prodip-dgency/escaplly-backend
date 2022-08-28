@@ -4,7 +4,13 @@ from django.dispatch import receiver
 from .models import MyUser, UserProfile
 
 @receiver(post_save, sender=MyUser)
-def create_user_profile(sender, instance, created, **kwargs):
+def myuser_post_save_handler(sender, instance, created, *args, **kwargs):
     if created:
-        UserProfile.objects.create(user=instance)
-        print('User profile created')
+        new_userprofile = UserProfile.objects.create(user=instance)
+        new_userprofile.save()
+    else:
+        try:
+            print(instance.userprofile)
+        except:
+            new_userprofile = UserProfile.objects.create(user=instance)
+            new_userprofile.save()
