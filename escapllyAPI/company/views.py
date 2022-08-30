@@ -4,8 +4,8 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 
 
-from .models import Company, CompanyProfile
-from .serializers import CompanySerialzer, CompanyProfileSerializer
+from .models import Company, CompanyProfile, Accessibility
+from .serializers import CompanySerialzer, CompanyProfileSerializer, AccessibilitySerializer
 
 
 def CompanyHome(request):
@@ -20,4 +20,8 @@ class CompanyViewset(ModelViewSet):
 class CompanyProfileViewset(ModelViewSet):
     queryset = CompanyProfile.objects.all()
     serializer_class = CompanyProfileSerializer
+
+class AccessibilityViewsets(ModelViewSet):
+    queryset = Accessibility.objects.all()
+    serializer_class = AccessibilitySerializer
 
