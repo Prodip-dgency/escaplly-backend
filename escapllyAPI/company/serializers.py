@@ -1,7 +1,7 @@
 from pyexpat import model
 from rest_framework.serializers import ModelSerializer
 
-from .models import Company, CompanyProfile
+from .models import Company, CompanyProfile, Accessibility
 
 
 class CompanySerialzer(ModelSerializer):
@@ -18,3 +18,10 @@ class CompanyProfileSerializer(ModelSerializer):
         model = CompanyProfile
         fields = "__all__"
         depth = 2
+
+
+class AccessibilitySerializer(ModelSerializer):
+    
+    class Meta:
+        model = Accessibility
+        fields = "__all__"

@@ -1,7 +1,7 @@
 from pyexpat import model
 from rest_framework.serializers import ModelSerializer
 
-from .models import Activity, ActivityProfile, Difficulty, Accessibility
+from .models import Activity, ActivityProfile, Difficulty
 
 class ActivitySerializer(ModelSerializer):
 
@@ -15,13 +15,6 @@ class DifficultySerializer(ModelSerializer):
     
     class Meta:
         model = Difficulty
-        fields = "__all__"
-
-
-class AccessibilitySerializer(ModelSerializer):
-    
-    class Meta:
-        model = Accessibility
         fields = "__all__"
 
 

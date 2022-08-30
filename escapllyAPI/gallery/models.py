@@ -7,7 +7,7 @@ from company.models import Company
 
 User = get_user_model()
 
-class Gallery(models.Model):
+class GalleryItem(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=500, null=True, blank=True)
     image = models.ImageField(upload_to='gallery/')

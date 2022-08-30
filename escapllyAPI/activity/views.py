@@ -1,29 +1,25 @@
 from django.shortcuts import render
 
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 
-from .models import Activity, ActivityProfile, Difficulty, Accessibility
-from .serializers import ActivitySerializer, ActivityProfileSerializer, DifficultySerializer, AccessibilitySerializer
+from .models import Activity, ActivityProfile, Difficulty
+from .serializers import ActivitySerializer, ActivityProfileSerializer, DifficultySerializer
 
 
 # Create your views here.
 
-class ActivityViewsets(viewsets.ModelViewSet):
-
+class ActivityViewsets(ModelViewSet):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
 
 
-class ActivityProfileViewsets(viewsets.ModelViewSet):
+class ActivityProfileViewsets(ModelViewSet):
     queryset = ActivityProfile.objects.all()
     serializer_class = ActivityProfileSerializer
 
 
-class DifficultyViewsets(viewsets.ModelViewSet):
+class DifficultyViewsets(ModelViewSet):
     queryset = Difficulty.objects.all()
     serializer_class = DifficultySerializer
 
 
-class AccessibilityViewsets(viewsets.ModelViewSet):
-    queryset = Accessibility.objects.all()
-    serializer_class = AccessibilitySerializer

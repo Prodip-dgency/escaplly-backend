@@ -1,11 +1,11 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import Gallery
+from .models import GalleryItem
 
 
 class GallerySerializers(ModelSerializer):
 
     class Meta:
-        model = Gallery
+        model = GalleryItem
         fields = "__all__"
         depth = 2
