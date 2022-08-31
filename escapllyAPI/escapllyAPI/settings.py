@@ -70,6 +70,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:8000',
+  'http://localhost:3000',
+  'http://localhost:8080',
+  'http://142.93.179.207'
+)
+
 ROOT_URLCONF = 'escapllyAPI.urls'
 
 
