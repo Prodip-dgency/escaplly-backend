@@ -34,6 +34,7 @@ class CompanyProfile(models.Model):
     address_line = models.CharField(max_length=200, null=True, blank=True)
     city = models.CharField(max_length=100, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
+    country = models.CharField(max_length=200, null=True, blank=True)
     website_url = models.CharField(max_length=500, null=True, blank=True)
     about = models.CharField(max_length=1000, null=True, blank=True)
     map_location = models.CharField(max_length=200, null=True, blank=True)
