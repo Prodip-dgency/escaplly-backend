@@ -3,6 +3,8 @@ from rest_framework.routers import DefaultRouter
 
 from .views import GalleryViewsets
 
+app_name = 'gallery'
+
 router = DefaultRouter()
 router.register('gallery', GalleryViewsets, basename='gallery')
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escaplly API</title>
+    <style>
+      .home-page {
+        width: 1120px;
+        margin: auto;
+        font-size: 18px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th {
+        padding: 10px;
+      }
+      td {
+        padding: 10px;
+      }
+      .page-header {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="home-page">
+      <div class="page-header">
+        <h2>List of the all viewsets</h2>
+      </div>
+      <table border="1px solid black">
+        <thead>
+          <tr>
+            <th>App Name</th>
+            <th>Viewsets URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>accounts</td>
+            <td><a href="{% url 'accounts:api-root' %}">{{ request.get_host }}{% url 'accounts:api-root' %}</a></td>
+          </tr>
+          <tr>
+            <td>activity</td>
+            <td><a href="{% url 'activity:api-root' %}">{{ request.get_host }}{% url 'activity:api-root' %}</a></td>
+          </tr>
+          <tr>
+            <td>company</td>
+            <td><a href="{% url 'company:api-root' %}">{{ request.get_host }}{% url 'company:api-root' %}</a></td>
+          </tr>
+          <tr>
+            <td>gallery</td>
+            <td><a href="{% url 'gallery:api-root' %}">{{ request.get_host }}{% url 'gallery:api-root' %}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
