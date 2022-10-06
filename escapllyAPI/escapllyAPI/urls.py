@@ -19,8 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import settings
 
+from .views import home, HomeView
+
 
 urlpatterns = [
+    path('', HomeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('company/', include('company.urls')),
     path('activity/', include('activity.urls')),
