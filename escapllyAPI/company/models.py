@@ -1,6 +1,7 @@
 from django.db import models
 
 from accounts.models import MyUser
+# from activity.models import Activity
 
 # Create your models here.
 
@@ -42,6 +43,13 @@ class CompanyProfile(models.Model):
     profile_image = models.ForeignKey('gallery.GalleryItem', on_delete=models.CASCADE, related_name='profile_image', null=True, blank=True)
     cover_image = models.ForeignKey('gallery.GalleryItem', on_delete=models.CASCADE, related_name='cover_image', null=True, blank=True)
     accessibility = models.ManyToManyField(Accessibility, blank=True)
+
+
+    def getActivities(self):
+        owncompany = self.company
+        activities = owncompany.activity_set.all()
+        total_activities = len(activities)
+        return {"activities": activities, "total_activities":total_activities}
 
     def __str__(self):
         return str(self.company)
