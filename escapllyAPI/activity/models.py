@@ -40,10 +40,6 @@ class ActivityProfile(models.Model):
     accompany_age = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
     main_image = models.ForeignKey(GalleryItem, related_name='main_image', on_delete=models.SET_NULL, null=True, blank=True)
-    image1 = models.ForeignKey(GalleryItem, related_name='image1', on_delete=models.SET_NULL, null=True, blank=True)
-    image2 = models.ForeignKey(GalleryItem, related_name='image2', on_delete=models.SET_NULL, null=True, blank=True)
-    image3 = models.ForeignKey(GalleryItem, related_name='image3', on_delete=models.SET_NULL, null=True, blank=True)
-    image4 = models.ForeignKey(GalleryItem, related_name='image4', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return str(self.activity)
