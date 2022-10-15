@@ -30,6 +30,8 @@ class Difficulty(models.Model):
 class ActivityProfile(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
     activity = models.OneToOneField(Activity, on_delete=models.CASCADE)
+    short_description = models.CharField(max_length=150, null=True, blank=True)
+    website_link = models.CharField(max_length=200, null=True, blank=True)
     storyline = models.CharField(max_length=1000, null=True, blank=True)
     price = models.IntegerField(null=True, blank=True)
     minimum_participant = models.IntegerField(null=True, blank=True)
