@@ -27,6 +27,13 @@ class Accessibility(models.Model):
         return self.title
 
 
+class GuideLine(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
 
 
 class CompanyProfile(models.Model):
@@ -43,6 +50,7 @@ class CompanyProfile(models.Model):
     profile_image = models.ForeignKey('gallery.GalleryItem', on_delete=models.CASCADE, related_name='profile_image', null=True, blank=True)
     cover_image = models.ForeignKey('gallery.GalleryItem', on_delete=models.CASCADE, related_name='cover_image', null=True, blank=True)
     accessibility = models.ManyToManyField(Accessibility, blank=True)
+    guideline = models.ManyToManyField(GuideLine, blank=True)
 
 
     def getActivities(self):
