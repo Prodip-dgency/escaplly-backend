@@ -47,8 +47,8 @@ class CompanyProfile(models.Model):
     about = models.CharField(max_length=1000, null=True, blank=True)
     map_location = models.CharField(max_length=200, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
-    profile_image = models.ForeignKey('gallery.GalleryItem', on_delete=models.CASCADE, related_name='profile_image', null=True, blank=True)
-    cover_image = models.ForeignKey('gallery.GalleryItem', on_delete=models.CASCADE, related_name='cover_image', null=True, blank=True)
+    profile_image = models.ForeignKey('gallery.GalleryItem', on_delete=models.SET_NULL, related_name='profile_image', null=True, blank=True)
+    cover_image = models.ForeignKey('gallery.GalleryItem', on_delete=models.SET_NULL, related_name='cover_image', null=True, blank=True)
     accessibility = models.ManyToManyField(Accessibility, blank=True)
     guideline = models.ManyToManyField(GuideLine, blank=True)
 
