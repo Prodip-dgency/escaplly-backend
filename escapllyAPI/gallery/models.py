@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from company.models import Company
+from activity.models import Activity
 
 # Create your models here.
 
@@ -13,6 +14,7 @@ class GalleryItem(models.Model):
     image = models.ImageField(upload_to='gallery/')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return "{}-{}".format(self.title, self.user)

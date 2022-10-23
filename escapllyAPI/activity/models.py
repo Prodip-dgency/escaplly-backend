@@ -1,7 +1,6 @@
 from django.db import models
 
 from company.models import Company
-from gallery.models import GalleryItem
 
 # Create your models here.
 
@@ -41,7 +40,7 @@ class ActivityProfile(models.Model):
     mimimum_age = models.IntegerField(null=True, blank=True)
     accompany_age = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
-    main_image = models.ForeignKey(GalleryItem, related_name='main_image', on_delete=models.SET_NULL, null=True, blank=True)
+    main_image = models.ForeignKey('gallery.GalleryItem', related_name='activity_main_image', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return str(self.activity)
