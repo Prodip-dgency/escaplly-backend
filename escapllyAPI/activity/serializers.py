@@ -1,13 +1,13 @@
 from rest_framework.serializers import ModelSerializer
 
 from .models import Activity, ActivityProfile, Difficulty
+from company.models import Company, CompanyProfile
 
 class ActivitySerializer(ModelSerializer):
 
     class Meta:
         model = Activity
         fields = "__all__"
-        depth = 2
 
 
 class DifficultySerializer(ModelSerializer):
@@ -23,6 +23,50 @@ class ActivityProfileSerializer(ModelSerializer):
         model = ActivityProfile
         fields = "__all__"
         depth = 3
+
+
+
+class ActivityProfileCustomSerializer(ModelSerializer):
+
+    class CompanyProfileSerializer(ModelSerializer):
+
+        class Meta:
+            model = CompanyProfile
+            fields = [
+                'id', 
+                'title', 
+                'city', 
+                'state',
+                'country',
+                'website_url',
+                'profile_image'
+            ]
+
+    activity = ActivitySerializer()
+    company_profile = CompanyProfileSerializer(source='getCompanyProfile')
+    difficulty = DifficultySerializer()
+
+    
+    class Meta:
+        model = ActivityProfile
+        fields = [
+            'id',
+            'title',
+            'activity',
+            'company_profile',
+            'short_description',
+            'website_link',
+            'storyline',
+            'price',
+            'minimum_participant',
+            'maximum_participant',
+            'duration',
+            'difficulty',
+            'mimimum_age',
+            'accompany_age',
+            'address',
+            'main_image'
+        ]
 
 
 
