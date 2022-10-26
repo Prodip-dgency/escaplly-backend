@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer
 
 from .models import Activity, ActivityProfile, Difficulty
 from company.models import Company, CompanyProfile
+from gallery.serializers import GallerySerializers
 
 class ActivitySerializer(ModelSerializer):
 
@@ -29,6 +30,7 @@ class ActivityProfileSerializer(ModelSerializer):
 class ActivityProfileCustomSerializer(ModelSerializer):
 
     class CompanyProfileSerializer(ModelSerializer):
+        profile_image = GallerySerializers()
 
         class Meta:
             model = CompanyProfile
@@ -38,13 +40,14 @@ class ActivityProfileCustomSerializer(ModelSerializer):
                 'city', 
                 'state',
                 'country',
-                'website_url',
                 'profile_image'
             ]
 
     activity = ActivitySerializer()
     company_profile = CompanyProfileSerializer(source='getCompanyProfile')
     difficulty = DifficultySerializer()
+    main_image = GallerySerializers()
+    gallery = GallerySerializers(source='getAllRelatedGalleryItems', many=True)
 
     
     class Meta:
@@ -65,7 +68,8 @@ class ActivityProfileCustomSerializer(ModelSerializer):
             'mimimum_age',
             'accompany_age',
             'address',
-            'main_image'
+            'main_image',
+            'gallery'
         ]
 
 

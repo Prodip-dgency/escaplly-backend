@@ -53,6 +53,11 @@ class ActivityProfile(models.Model):
         own_company_profile = get_object_or_404(company_profiles, pk=owncompany.id)
         return own_company_profile
 
+    def getAllRelatedGalleryItems(self):
+        own_activity = self.activity
+        own_gallery_item = own_activity.galleryitem_set.all()
+        return own_gallery_item
+
     def __str__(self):
         return str(self.activity)
     

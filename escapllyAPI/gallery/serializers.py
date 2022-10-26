@@ -8,4 +8,3 @@ class GallerySerializers(ModelSerializer):
     class Meta:
         model = GalleryItem
         fields = "__all__"
-        depth = 2
