@@ -5,8 +5,8 @@ from rest_framework.viewsets import ModelViewSet, ViewSet
 from rest_framework.response import Response
 
 
-from .models import Company, CompanyProfile, Accessibility
-from .serializers import CompanySerialzer, CompanyProfileSerializer, AccessibilitySerializer, CompanyDetailsSerializer
+from .models import Company, CompanyProfile, Accessibility, GuideLine
+from .serializers import CompanySerialzer, CompanyProfileSerializer, AccessibilitySerializer, CompanyDetailsSerializer, GuideLineSerializer
 
 
 def CompanyHome(request):
@@ -25,6 +25,11 @@ class CompanyProfileViewset(ModelViewSet):
 class AccessibilityViewsets(ModelViewSet):
     queryset = Accessibility.objects.all()
     serializer_class = AccessibilitySerializer
+
+
+class GuideLinesViewsets(ModelViewSet):
+    queryset = GuideLine.objects.all()
+    serializer_class = GuideLineSerializer
 
 
 # class CompanyDetailsViewsets(ModelViewSet):

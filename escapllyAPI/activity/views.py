@@ -53,12 +53,12 @@ class ActivityCustomAPIViewset(ViewSet):
 
     def list(self, request):
         queryset = ActivityProfile.objects.all()
-        serializer = ActivityProfileCustomSerializer(queryset, many=True)
+        serializer = ActivityProfileCustomSerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         print('Passed')
         queryset = ActivityProfile.objects.all()
         activity = get_object_or_404(queryset, pk=pk)
-        serializer = ActivityProfileCustomSerializer(activity)
+        serializer = ActivityProfileCustomSerializer(activity, context={'request': request})
         return Response(serializer.data)
