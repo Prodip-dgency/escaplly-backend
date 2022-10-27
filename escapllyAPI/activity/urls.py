@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import ActivityViewsets, ActivityProfileViewsets, DifficultyViewsets, ActivityCustomAPIView, ActivityCustomAPIViewset
+from .views import ActivityViewsets, ActivityProfileViewsets, DifficultyViewsets, ActivityCustomAPIViewset
 
 app_name = 'activity'
 
@@ -13,5 +13,4 @@ router.register('customapi', ActivityCustomAPIViewset, basename='customapi')
 
 urlpatterns = [
     path('viewset/', include(router.urls)),
-    path('customapi/', ActivityCustomAPIView.as_view(), name='customAPIView') 
 ]

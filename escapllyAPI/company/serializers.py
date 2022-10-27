@@ -3,6 +3,7 @@ from rest_framework.serializers import ModelSerializer
 
 from .models import Company, CompanyProfile, Accessibility, GuideLine
 from activity.serializers import ActivityProfileSerializer
+from gallery.serializers import GallerySerializers
 
 
 class CompanySerialzer(ModelSerializer):
@@ -39,9 +40,19 @@ class CompanyDetailsSerializer(ModelSerializer):
     company = CompanySerialzer()
     activity  = ActivityProfileSerializer(source='getActivities.activities', many=True)
     total_activities  = serializers.IntegerField(source='getActivities.total_activities')
+    gallery = GallerySerializers(source='getAllRelatedGalleryItems', many=True)
 
     class Meta:
         model = CompanyProfile
-        fields = ['title', 'address_line', 'city', 'state', 'company', 'activity', 'total_activities']
+        fields = [
+            'title', 
+            'address_line', 
+            'city', 
+            'state', 
+            'company', 
+            'activity', 
+            'total_activities',
+            'gallery'
+        ]
 
 
