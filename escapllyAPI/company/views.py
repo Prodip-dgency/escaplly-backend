@@ -32,11 +32,6 @@ class GuideLinesViewsets(ModelViewSet):
     serializer_class = GuideLineSerializer
 
 
-# class CompanyDetailsViewsets(ModelViewSet):
-#     queryset = CompanyProfile.objects.all()
-#     serializer_class = CompanyDetailsSerializer
-
-
 class CompanyDetailsViewsets(ViewSet):
 
     def list(self, request):

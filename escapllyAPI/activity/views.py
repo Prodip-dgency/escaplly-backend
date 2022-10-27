@@ -26,29 +26,6 @@ class DifficultyViewsets(ModelViewSet):
     serializer_class = DifficultySerializer
 
 
-class ActivityCustomAPIView(APIView):
-    
-    def get(self, request, fromat=None):
-        activity = Activity.objects.get(pk=6)
-        activities = activity.title
-        return Response(activities)
-
-
-# class ActivityCustomAPIViewset(ViewSet):
-
-#     def list(self, request):
-#         queryset = ActivityProfile.objects.all()
-#         serializer = ActivityProfileSerializer(queryset, many=True)
-#         return Response(serializer.data)
-
-#     def retrieve(self, request, pk=None):
-#         print('Passed')
-#         queryset = ActivityProfile.objects.all()
-#         activity = get_object_or_404(queryset, pk=pk)
-#         serializer = ActivityProfileSerializer(activity)
-#         return Response(serializer.data)
-
-
 class ActivityCustomAPIViewset(ViewSet):
 
     def list(self, request):
@@ -57,7 +34,6 @@ class ActivityCustomAPIViewset(ViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        print('Passed')
         queryset = ActivityProfile.objects.all()
         activity = get_object_or_404(queryset, pk=pk)
         serializer = ActivityProfileCustomSerializer(activity, context={'request': request})

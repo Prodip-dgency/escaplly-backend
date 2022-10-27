@@ -56,8 +56,17 @@ class CompanyProfile(models.Model):
     def getActivities(self):
         owncompany = self.company
         activities = owncompany.activity_set.all()
+        activity_profiles = []
+        for item in activities:
+            activity_profiles.append(item.activityprofile)
         total_activities = len(activities)
-        return {"activities": activities, "total_activities":total_activities}
+        print(activities)
+        return {"activities": activity_profiles, "total_activities":total_activities}
+
+    def getAllRelatedGalleryItems(self):
+        own_company = self.company
+        own_gallery_items = own_company.galleryitem_set.all()
+        return own_gallery_items
 
     def __str__(self):
         return str(self.company)
