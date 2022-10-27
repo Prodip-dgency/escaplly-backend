@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from .models import Company, CompanyProfile, Accessibility
+from .models import Company, CompanyProfile, Accessibility, GuideLine
 from activity.serializers import ActivityProfileSerializer
 
 
@@ -25,6 +25,13 @@ class AccessibilitySerializer(ModelSerializer):
     
     class Meta:
         model = Accessibility
+        fields = "__all__"
+
+
+class GuideLineSerializer(ModelSerializer):
+
+    class Meta:
+        model = GuideLine
         fields = "__all__"
 
 

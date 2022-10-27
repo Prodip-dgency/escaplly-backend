@@ -1,7 +1,7 @@
 from django.db import models
 from django.shortcuts import get_object_or_404
 
-from company.models import Company, CompanyProfile
+from company.models import Company, CompanyProfile, GuideLine
 
 # Create your models here.
 
@@ -42,6 +42,7 @@ class ActivityProfile(models.Model):
     accompany_age = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
     main_image = models.ForeignKey('gallery.GalleryItem', related_name='activity_main_image', on_delete=models.SET_NULL, null=True, blank=True)
+    guideline = models.ManyToManyField(GuideLine, blank=True)
 
     def getCompany(self):
         owncompany = self.activity.company

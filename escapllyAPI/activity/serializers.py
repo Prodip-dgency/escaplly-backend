@@ -1,4 +1,5 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, Serializer
+from rest_framework import serializers
 
 from .models import Activity, ActivityProfile, Difficulty
 from company.models import Company, CompanyProfile
@@ -26,7 +27,6 @@ class ActivityProfileSerializer(ModelSerializer):
         depth = 3
 
 
-
 class ActivityProfileCustomSerializer(ModelSerializer):
 
     class CompanyProfileSerializer(ModelSerializer):
@@ -43,10 +43,15 @@ class ActivityProfileCustomSerializer(ModelSerializer):
                 'profile_image'
             ]
 
+    class GuideLineSerializer(Serializer):
+        title = serializers.CharField(max_length=100)
+        description = serializers.CharField(max_length=200)
+
     activity = ActivitySerializer()
     company_profile = CompanyProfileSerializer(source='getCompanyProfile')
     difficulty = DifficultySerializer()
     main_image = GallerySerializers()
+    guideline = GuideLineSerializer(many=True)
     gallery = GallerySerializers(source='getAllRelatedGalleryItems', many=True)
 
     
@@ -68,7 +73,9 @@ class ActivityProfileCustomSerializer(ModelSerializer):
             'mimimum_age',
             'accompany_age',
             'address',
+            'guideline',
             'main_image',
+            'guideline',
             'gallery'
         ]
 
