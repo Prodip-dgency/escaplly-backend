@@ -60,8 +60,7 @@ class CompanyProfile(models.Model):
         for item in activities:
             activity_profiles.append(item.activityprofile)
         total_activities = len(activities)
-        print(activities)
-        return {"activities": activity_profiles, "total_activities":total_activities}
+        return {"activitie_profiles": activity_profiles, "total_activities":total_activities}
 
     def getAllRelatedGalleryItems(self):
         own_company = self.company

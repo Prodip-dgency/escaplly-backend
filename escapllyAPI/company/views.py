@@ -2,11 +2,14 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from rest_framework.viewsets import ModelViewSet, ViewSet
+from rest_framework.permissions import SAFE_METHODS
 from rest_framework.response import Response
 
 
 from .models import Company, CompanyProfile, Accessibility, GuideLine
-from .serializers import CompanySerialzer, CompanyProfileSerializer, AccessibilitySerializer, CompanyDetailsSerializer, GuideLineSerializer
+from .serializers import (CompanyProfileSafeSerializer, CompanySafeSerializer, CompanySerializer, 
+                          CompanyProfileSerializer, AccessibilitySerializer, 
+                          CompanyDetailsSerializer, GuideLineSerializer)
 
 
 def CompanyHome(request):
@@ -15,12 +18,42 @@ def CompanyHome(request):
 
 class CompanyViewset(ModelViewSet):
     queryset = Company.objects.all()
-    serializer_class = CompanySerialzer
+
+    def get_serializer_class(self):
+        if self.request.method in SAFE_METHODS:
+            return CompanySafeSerializer
+        return CompanySerializer
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+
+        if self.request.method in SAFE_METHODS:
+            context['exclude_fields'] = {
+                                            'MyUser': {
+                                                'password', 
+                                                'last_login', 
+                                                'is_superuser', 
+                                                'is_staff', 
+                                                'is_active', 
+                                                'date_joined', 
+                                                'groups', 
+                                                'user_permissions'
+                                            }
+                                        }
+        return context
+        
+
+    
 
 
 class CompanyProfileViewset(ModelViewSet):
     queryset = CompanyProfile.objects.all()
-    serializer_class = CompanyProfileSerializer
+    
+    def get_serializer_class(self):
+        if self.request.method in SAFE_METHODS:
+            return CompanyProfileSafeSerializer
+        return CompanyProfileSerializer
+
 
 class AccessibilityViewsets(ModelViewSet):
     queryset = Accessibility.objects.all()
