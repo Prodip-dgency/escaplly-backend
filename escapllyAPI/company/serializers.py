@@ -2,33 +2,56 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from .models import Company, CompanyProfile, Accessibility, GuideLine
-from activity.serializers import ActivityProfileSerializer
+from activity.models import ActivityProfile, Difficulty
+from accounts.serializers import MyUserCustomSerializer, MyUserSerializer
+# from activity.serializers import ActivityProfileSerializer
 from gallery.serializers import GallerySerializers
 
 
-class CompanySerialzer(ModelSerializer):
+# Serializers for Company model
+class CompanySerializer(ModelSerializer):
 
     class Meta:
         model = Company
         fields = "__all__"
-        depth = 2
 
 
+
+class CompanySafeSerializer(ModelSerializer):
+    user = MyUserSerializer()
+
+    class Meta:
+        model = Company
+        fields = "__all__"
+
+
+
+# Serializers for CompanyProfile model
 class CompanyProfileSerializer(ModelSerializer):
 
     class Meta:
         model = CompanyProfile
         fields = "__all__"
-        depth = 2
 
 
+class CompanyProfileSafeSerializer(ModelSerializer):
+    company = CompanySerializer()
+    profile_image = GallerySerializers()
+    cover_image = GallerySerializers()
+
+    class Meta:
+        model = CompanyProfile
+        fields = "__all__"
+
+
+# Serializers for Accessibility model
 class AccessibilitySerializer(ModelSerializer):
     
     class Meta:
         model = Accessibility
         fields = "__all__"
 
-
+# Serializers for GuideLine model
 class GuideLineSerializer(ModelSerializer):
 
     class Meta:
@@ -36,23 +59,57 @@ class GuideLineSerializer(ModelSerializer):
         fields = "__all__"
 
 
+# Custom Serializers for CompanyProfile model
+class DifficultySerializer(ModelSerializer):
+
+    class Meta:
+        model = Difficulty
+        fields = ["title"]
+
 class CompanyDetailsSerializer(ModelSerializer):
-    company = CompanySerialzer()
-    activity  = ActivityProfileSerializer(source='getActivities.activities', many=True)
-    total_activities  = serializers.IntegerField(source='getActivities.total_activities')
+
+
+    class ActivityProfileSerializer(ModelSerializer):
+        main_image = GallerySerializers()
+        difficulty = DifficultySerializer()
+
+        class Meta:
+            model = ActivityProfile
+            fields = [
+                        'main_image', 
+                        'minimum_participant',
+                        'maximum_participant',
+                        'duration',
+                        'difficulty',
+                        'mimimum_age',
+                        'title',
+                        'short_description',
+                        'price'
+                    ]
+
+    activity_profiles  = ActivityProfileSerializer(source='getActivities.activitie_profiles', many=True)
+    available_escape_game  = serializers.IntegerField(source='getActivities.total_activities')
     gallery = GallerySerializers(source='getAllRelatedGalleryItems', many=True)
+    profile_image = GallerySerializers()
+    cover_image = GallerySerializers()
 
     class Meta:
         model = CompanyProfile
         fields = [
-            'title', 
-            'address_line', 
             'city', 
             'state', 
-            'company', 
-            'activity', 
-            'total_activities',
-            'gallery'
+            'title', 
+            'cover_image',
+            'profile_image',
+            'available_escape_game',
+            'about',
+            'address_line',
+            'website_url',
+            'phone_number', 
+            'activity_profiles', 
+            'gallery',
         ]
 
+
+# Custom Serializers for CompanyProfile model
 
