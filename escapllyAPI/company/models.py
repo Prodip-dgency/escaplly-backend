@@ -57,10 +57,43 @@ class CompanyProfile(models.Model):
         owncompany = self.company
         activities = owncompany.activity_set.all()
         activity_profiles = []
+        lowest_age = None
+        average_minimum_participant = None
+        average_maximum_participant = None
+        highest_accompany_age = None
+        average_game_duration = None
         for item in activities:
             activity_profiles.append(item.activityprofile)
+        if activity_profiles:
+            lowest_age = activity_profiles[0].mimimum_age
+            average_minimum_participant = activity_profiles[0].minimum_participant
+            average_maximum_participant = activity_profiles[0].maximum_participant
+            highest_accompany_age = activity_profiles[0].accompany_age
+            game_duration = activity_profiles[0].duration
+            for activity_profile in activity_profiles:
+                game_duration = activity_profile.duration + game_duration
+                if activity_profile.mimimum_age < lowest_age:
+                    lowest_age = activity_profile.mimimum_age
+                if activity_profile.minimum_participant < average_minimum_participant:
+                    average_minimum_participant = activity_profile.minimum_participant
+                if activity_profile.maximum_participant > average_maximum_participant:
+                    average_maximum_participant = activity_profile.maximum_participant
+                if activity_profile.accompany_age > highest_accompany_age:
+                    highest_accompany_age = activity_profile.accompany_age
+
+            if game_duration:
+                average_game_duration = round(game_duration/len(activity_profiles), 0)        
+
         total_activities = len(activities)
-        return {"activitie_profiles": activity_profiles, "total_activities":total_activities}
+        return {
+            "activitie_profiles": activity_profiles,
+            "total_activities":total_activities,
+            'lowest_age': lowest_age,
+            'average_minimum_participant': average_minimum_participant,
+            'average_maximum_participant': average_maximum_participant,
+            'highest_accompany_age': highest_accompany_age,
+            'average_game_duration': average_game_duration
+        }
 
     def getAllRelatedGalleryItems(self):
         own_company = self.company

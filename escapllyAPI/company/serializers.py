@@ -89,6 +89,11 @@ class CompanyDetailsSerializer(ModelSerializer):
 
     activity_profiles  = ActivityProfileSerializer(source='getActivities.activitie_profiles', many=True)
     available_escape_game  = serializers.IntegerField(source='getActivities.total_activities')
+    lowest_age  = serializers.IntegerField(source='getActivities.lowest_age')
+    average_minimum_participant  = serializers.IntegerField(source='getActivities.average_minimum_participant')
+    average_maximum_participant  = serializers.IntegerField(source='getActivities.average_maximum_participant')
+    highest_accompany_age  = serializers.IntegerField(source='getActivities.highest_accompany_age')
+    average_game_duration  = serializers.IntegerField(source='getActivities.average_game_duration')
     gallery = GallerySerializers(source='getAllRelatedGalleryItems', many=True)
     profile_image = GallerySerializers()
     cover_image = GallerySerializers()
@@ -96,6 +101,7 @@ class CompanyDetailsSerializer(ModelSerializer):
     class Meta:
         model = CompanyProfile
         fields = [
+            'id',
             'city', 
             'state', 
             'title', 
@@ -106,6 +112,11 @@ class CompanyDetailsSerializer(ModelSerializer):
             'address_line',
             'website_url',
             'phone_number', 
+            'lowest_age',
+            'average_game_duration',
+            'highest_accompany_age',
+            'average_maximum_participant',
+            'average_minimum_participant',
             'activity_profiles', 
             'gallery',
         ]
