@@ -38,13 +38,10 @@ class CompanyViewset(ModelViewSet):
                                                 'date_joined', 
                                                 'groups', 
                                                 'user_permissions'
-                                            }
+                                            },
                                         }
         return context
         
-
-    
-
 
 class CompanyProfileViewset(ModelViewSet):
     queryset = CompanyProfile.objects.all()
@@ -69,7 +66,22 @@ class CompanyDetailsViewsets(ViewSet):
 
     def list(self, request):
         queryset = CompanyProfile.objects.all()
-        serializer = CompanyDetailsSerializer(queryset, many=True)
+        context = {
+            'request': request,
+            'exclude_fields': {
+                'GalleryItem': {
+                    'id',
+                    'title',
+                    'description',
+                    'user',
+                    'company',
+                    'activity'
+                }
+            }
+        }
+        
+
+        serializer = CompanyDetailsSerializer(queryset, many=True, context=context)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
