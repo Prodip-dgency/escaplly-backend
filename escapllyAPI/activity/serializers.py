@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 from .models import Activity, ActivityProfile, Difficulty
 from company.models import CompanyProfile
-from company.serializers import CompanySerializer, CompanyProfileSerializer
+from company.serializers import CompanySerializer, CompanyProfileSerializer, CompanyProfileSafeSerializer
 from gallery.serializers import GallerySerializers
 
 
@@ -50,56 +50,53 @@ class ActivityProfileSafeSerializer(ModelSerializer):
 
 
 # Serializers for CutsomActivityProfile
+
+class GalleryCustomSerializer(Serializer):
+    image = serializers.ImageField()
+
 class ActivityProfileCustomSerializer(ModelSerializer):
-
-    # class CompanyProfileSerializer(ModelSerializer):
-    #     profile_image = GallerySerializers()
-
-    #     class Meta:
-    #         model = CompanyProfile
-    #         fields = [
-    #             'id', 
-    #             'title', 
-    #             'city', 
-    #             'state',
-    #             'country',
-    #             'profile_image'
-    #         ]
+    
+    class CompanyProfileCustomSerializer(Serializer):
+        city = serializers.CharField(max_length=100)
+        state = serializers.CharField(max_length=100)
+        title = serializers.CharField(max_length=200)
+        profile_image = GalleryCustomSerializer()
+        address_line = serializers.CharField(max_length=200)
 
     class GuideLineSerializer(Serializer):
         title = serializers.CharField(max_length=100)
         description = serializers.CharField(max_length=200)
 
-    activity = ActivitySerializer()
-    company_profile = CompanyProfileSerializer(source='getCompanyProfile')
-    difficulty = DifficultySerializer()
-    main_image = GallerySerializers()
+    
+    class DifficultyCustomSerializer(Serializer):
+        title = serializers.CharField(max_length=100)
+
+    company_profile = CompanyProfileCustomSerializer(source='getCompanyProfile')
+    difficulty = DifficultyCustomSerializer()
     guideline = GuideLineSerializer(many=True)
-    gallery = GallerySerializers(source='getAllRelatedGalleryItems', many=True)
+    gallery = GalleryCustomSerializer(source='getAllRelatedGalleryItems', many=True)
 
     
     class Meta:
         model = ActivityProfile
         fields = [
+            'company_profile',
             'id',
             'title',
-            'activity',
-            'company_profile',
             'short_description',
-            'website_link',
+            'gallery',
             'storyline',
             'price',
             'minimum_participant',
             'maximum_participant',
             'duration',
             'difficulty',
+            # 'website_link',
             'mimimum_age',
             'accompany_age',
-            'address',
+            # 'address',
             'guideline',
-            'main_image',
-            'guideline',
-            'gallery'
+            # 'main_image',
         ]
 
 

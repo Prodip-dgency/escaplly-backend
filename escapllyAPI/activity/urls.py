@@ -9,7 +9,7 @@ router = DefaultRouter()
 router.register('activity', ActivityViewsets, basename='activity')
 router.register('activityprofile', ActivityProfileViewsets, basename='activityprofile')
 router.register('difficulty', DifficultyViewsets, basename='difficulty')
-router.register('customapi', ActivityCustomAPIViewset, basename='customapi')
+router.register('custom-activity-profile-api', ActivityCustomAPIViewset, basename='customapi')
 
 urlpatterns = [
     path('viewset/', include(router.urls)),
