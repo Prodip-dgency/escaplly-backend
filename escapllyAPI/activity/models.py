@@ -47,7 +47,7 @@ class ActivityProfile(models.Model):
     short_description = models.CharField(max_length=150, null=True, blank=True)
     website_link = models.CharField(max_length=200, null=True, blank=True)
     storyline = models.CharField(max_length=1000, null=True, blank=True)
-    price = models.IntegerField(null=True, blank=True)
+    price = models.DecimalField(decimal_places=2, max_digits=7, null=True, blank=True)
     minimum_participant = models.IntegerField(null=True, blank=True)
     maximum_participant =  models.IntegerField(null=True, blank=True)
     duration = models.IntegerField(null=True, blank=True)
@@ -59,7 +59,6 @@ class ActivityProfile(models.Model):
     guideline = models.ManyToManyField(GuideLine, blank=True)
     activity_theme = models.ManyToManyField(ActivityTheme, blank=True)
     activity_type = models.ForeignKey(ActivityType, on_delete=models.SET_NULL, null=True, blank=True)
-
 
 
     def getCompany(self):
