@@ -60,31 +60,59 @@ class GuideLineSerializer(ModelSerializer):
 
 
 # Custom Serializers for CompanyProfile model
-class DifficultySerializer(ModelSerializer):
+class DifficultyCustomSerializer(ModelSerializer):
 
     class Meta:
         model = Difficulty
         fields = ["title"]
 
+
+
+class GalleryCustomSerializer(serializers.Serializer):
+    image = serializers.ImageField()
+
+class ActivityThemeCustomSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=200)
+
+class ActivityTypeCustomSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=200)
+
 class CompanyDetailsSerializer(ModelSerializer):
 
-    class ActivityProfileSerializer(ModelSerializer):
-        main_image = GallerySerializers()
-        difficulty = DifficultySerializer()
+    # class ActivityProfileSerializer(ModelSerializer):
+    #     main_image = GallerySerializers()
+    #     difficulty = DifficultySerializer()
 
-        class Meta:
-            model = ActivityProfile
-            fields = [
-                        'main_image', 
-                        'minimum_participant',
-                        'maximum_participant',
-                        'duration',
-                        'difficulty',
-                        'mimimum_age',
-                        'title',
-                        'short_description',
-                        'price'
-                    ]
+    #     class Meta:
+    #         model = ActivityProfile
+    #         fields = [
+    #                     'main_image', 
+    #                     'minimum_participant',
+    #                     'maximum_participant',
+    #                     'duration',
+    #                     'difficulty',
+    #                     'mimimum_age',
+    #                     'title',
+    #                     'short_description',
+    #                     'price'
+    #                 ]
+
+
+    class ActivityProfileSerializer(serializers.Serializer):
+        main_image =  GalleryCustomSerializer()
+        minimum_participant = serializers.IntegerField()
+        maximum_participant = serializers.IntegerField()
+        duration = serializers.IntegerField()
+        difficulty = DifficultyCustomSerializer()
+        mimimum_age = serializers.IntegerField()
+        title = serializers.CharField(max_length=200)
+        short_description = serializers.CharField(max_length=150)
+        price = serializers.DecimalField(max_digits=7, decimal_places=2)
+        activity_theme = ActivityThemeCustomSerializer(many=True)
+        activity_type = ActivityTypeCustomSerializer()
+
+
+
     
     activity_profiles  = ActivityProfileSerializer(source='getActivities.activitie_profiles', many=True)
     available_escape_game  = serializers.IntegerField(source='getActivities.total_activities')
