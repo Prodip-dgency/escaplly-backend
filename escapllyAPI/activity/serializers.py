@@ -1,9 +1,8 @@
 from rest_framework.serializers import ModelSerializer, Serializer
 from rest_framework import serializers
 
-from .models import Activity, ActivityProfile, Difficulty
-from company.models import CompanyProfile
-from company.serializers import CompanySerializer, CompanyProfileSerializer, CompanyProfileSafeSerializer
+from .models import Activity, ActivityProfile, Difficulty, ActivityTheme, ActivityType
+from company.serializers import CompanySerializer
 from gallery.serializers import GallerySerializers
 
 
@@ -28,6 +27,22 @@ class DifficultySerializer(ModelSerializer):
     
     class Meta:
         model = Difficulty
+        fields = "__all__"
+
+
+# Serializers for ActivityTheme model
+class ActivityThemeSerializer(ModelSerializer):
+    
+    class Meta:
+        model = ActivityTheme
+        fields = "__all__"
+
+
+# Serializers for ActivityType model
+class ActivityTypeSerializer(ModelSerializer):
+    
+    class Meta:
+        model = ActivityType
         fields = "__all__"
 
 
@@ -73,6 +88,8 @@ class ActivityProfileCustomSerializer(ModelSerializer):
 
     company_profile = CompanyProfileCustomSerializer(source='getCompanyProfile')
     difficulty = DifficultyCustomSerializer()
+    activity_type = ActivityTypeSerializer()
+    activity_theme = ActivityThemeSerializer(many=True)
     guideline = GuideLineSerializer(many=True)
     gallery = GalleryCustomSerializer(source='getAllRelatedGalleryItems', many=True)
 
@@ -97,6 +114,8 @@ class ActivityProfileCustomSerializer(ModelSerializer):
             # 'address',
             'guideline',
             # 'main_image',
+            'activity_type',
+            'activity_theme'
         ]
 
 
