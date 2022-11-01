@@ -9,7 +9,7 @@ router = DefaultRouter()
 router.register('company', CompanyViewset, basename='company')
 router.register('company-profile', CompanyProfileViewset, basename='company-profile')
 router.register('accessibility', AccessibilityViewsets, basename='accessibility' )
-router.register('company-details', CompanyDetailsViewsets, basename='company-details')
+router.register('custom-company-profile-api', CompanyDetailsViewsets, basename='company-details')
 router.register('guidelines', GuideLinesViewsets, basename='guide_lines')
 
 

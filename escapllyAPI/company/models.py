@@ -52,6 +52,7 @@ class CompanyProfile(models.Model):
     accessibility = models.ManyToManyField(Accessibility, blank=True)
     guideline = models.ManyToManyField(GuideLine, blank=True)
 
+    
 
     def getActivities(self):
         owncompany = self.company
@@ -85,7 +86,9 @@ class CompanyProfile(models.Model):
                 average_game_duration = round(game_duration/len(activity_profiles), 0)        
 
         total_activities = len(activities)
-        return {
+
+
+        values = {
             "activitie_profiles": activity_profiles,
             "total_activities":total_activities,
             'lowest_age': lowest_age,
@@ -94,6 +97,9 @@ class CompanyProfile(models.Model):
             'highest_accompany_age': highest_accompany_age,
             'average_game_duration': average_game_duration
         }
+
+        return values
+
 
     def getAllRelatedGalleryItems(self):
         own_company = self.company

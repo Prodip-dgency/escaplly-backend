@@ -4,7 +4,6 @@ from rest_framework.serializers import ModelSerializer
 from .models import Company, CompanyProfile, Accessibility, GuideLine
 from activity.models import ActivityProfile, Difficulty
 from accounts.serializers import MyUserCustomSerializer, MyUserSerializer
-# from activity.serializers import ActivityProfileSerializer
 from gallery.serializers import GallerySerializers
 
 
@@ -32,6 +31,7 @@ class CompanyProfileSerializer(ModelSerializer):
     class Meta:
         model = CompanyProfile
         fields = "__all__"
+
 
 
 class CompanyProfileSafeSerializer(ModelSerializer):
@@ -68,7 +68,6 @@ class DifficultySerializer(ModelSerializer):
 
 class CompanyDetailsSerializer(ModelSerializer):
 
-
     class ActivityProfileSerializer(ModelSerializer):
         main_image = GallerySerializers()
         difficulty = DifficultySerializer()
@@ -86,7 +85,7 @@ class CompanyDetailsSerializer(ModelSerializer):
                         'short_description',
                         'price'
                     ]
-
+    
     activity_profiles  = ActivityProfileSerializer(source='getActivities.activitie_profiles', many=True)
     available_escape_game  = serializers.IntegerField(source='getActivities.total_activities')
     lowest_age  = serializers.IntegerField(source='getActivities.lowest_age')
