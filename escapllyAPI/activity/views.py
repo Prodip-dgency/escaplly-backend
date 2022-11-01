@@ -6,8 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import SAFE_METHODS
 
-from .models import Activity, ActivityProfile, Difficulty
-from .serializers import ActivitySerializer, ActivitySafeSerializer, ActivityProfileSerializer, ActivityProfileSafeSerializer, DifficultySerializer, ActivityProfileCustomSerializer
+from .models import Activity, ActivityProfile, Difficulty, ActivityTheme, ActivityType
+from .serializers import ActivitySerializer, ActivitySafeSerializer, ActivityProfileSerializer, ActivityProfileSafeSerializer, DifficultySerializer, ActivityProfileCustomSerializer, ActivityThemeSerializer, ActivityTypeSerializer
 
 
 # Create your views here.
@@ -18,7 +18,7 @@ class ActivityViewsets(ModelViewSet):
     def get_serializer_class(self):
         if self.request.method in SAFE_METHODS:
             return ActivitySafeSerializer
-        return ActivityProfileSafeSerializer
+        return ActivitySerializer
 
 class ActivityProfileViewsets(ModelViewSet):
     queryset = ActivityProfile.objects.all()
@@ -31,6 +31,16 @@ class ActivityProfileViewsets(ModelViewSet):
 class DifficultyViewsets(ModelViewSet):
     queryset = Difficulty.objects.all()
     serializer_class = DifficultySerializer
+
+
+class ActivityThemeViewset(ModelViewSet):
+    queryset = ActivityTheme.objects.all()
+    serializer_class = ActivityThemeSerializer
+
+
+class ActivityTypeViewset(ModelViewSet):
+    queryset = ActivityType.objects.all()
+    serializer_class = ActivityTypeSerializer
 
 
 class ActivityCustomAPIViewset(ViewSet):

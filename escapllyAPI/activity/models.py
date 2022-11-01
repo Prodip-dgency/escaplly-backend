@@ -27,6 +27,20 @@ class Difficulty(models.Model):
         return self.title
 
 
+class ActivityTheme(models.Model):
+    title = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
+class ActivityType(models.Model):
+    title = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
 class ActivityProfile(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
     activity = models.OneToOneField(Activity, on_delete=models.CASCADE)
@@ -43,6 +57,10 @@ class ActivityProfile(models.Model):
     address = models.CharField(max_length=200, null=True, blank=True)
     main_image = models.ForeignKey('gallery.GalleryItem', related_name='activity_main_image', on_delete=models.SET_NULL, null=True, blank=True)
     guideline = models.ManyToManyField(GuideLine, blank=True)
+    activity_theme = models.ManyToManyField(ActivityTheme, blank=True)
+    activity_type = models.ForeignKey(ActivityType, on_delete=models.SET_NULL, null=True, blank=True)
+
+
 
     def getCompany(self):
         owncompany = self.activity.company
