@@ -72,6 +72,7 @@ class GalleryCustomSerializer(Serializer):
 class ActivityProfileCustomSerializer(ModelSerializer):
     
     class CompanyProfileCustomSerializer(Serializer):
+        id = serializers.IntegerField()
         city = serializers.CharField(max_length=100)
         state = serializers.CharField(max_length=100)
         title = serializers.CharField(max_length=200)
@@ -92,6 +93,8 @@ class ActivityProfileCustomSerializer(ModelSerializer):
     activity_theme = ActivityThemeSerializer(many=True)
     guideline = GuideLineSerializer(many=True)
     gallery = GalleryCustomSerializer(source='getAllRelatedGalleryItems', many=True)
+    main_image = GalleryCustomSerializer()
+
 
     
     class Meta:
@@ -113,7 +116,7 @@ class ActivityProfileCustomSerializer(ModelSerializer):
             'accompany_age',
             # 'address',
             'guideline',
-            # 'main_image',
+            'main_image',
             'activity_type',
             'activity_theme'
         ]
