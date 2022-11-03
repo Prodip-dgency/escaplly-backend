@@ -67,7 +67,6 @@ class DifficultyCustomSerializer(ModelSerializer):
         fields = ["title"]
 
 
-
 class GalleryCustomSerializer(serializers.Serializer):
     image = serializers.ImageField()
 
@@ -77,28 +76,8 @@ class ActivityThemeCustomSerializer(serializers.Serializer):
 class ActivityTypeCustomSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=200)
 
-class CompanyDetailsSerializer(ModelSerializer):
 
-    # class ActivityProfileSerializer(ModelSerializer):
-    #     main_image = GallerySerializers()
-    #     difficulty = DifficultySerializer()
-
-    #     class Meta:
-    #         model = ActivityProfile
-    #         fields = [
-    #                     'main_image', 
-    #                     'minimum_participant',
-    #                     'maximum_participant',
-    #                     'duration',
-    #                     'difficulty',
-    #                     'mimimum_age',
-    #                     'title',
-    #                     'short_description',
-    #                     'price'
-    #                 ]
-
-
-    class ActivityProfileSerializer(serializers.Serializer):
+class ActivityProfileSerializer(serializers.Serializer):
         main_image =  GalleryCustomSerializer()
         minimum_participant = serializers.IntegerField()
         maximum_participant = serializers.IntegerField()
@@ -111,10 +90,9 @@ class CompanyDetailsSerializer(ModelSerializer):
         activity_theme = ActivityThemeCustomSerializer(many=True)
         activity_type = ActivityTypeCustomSerializer()
 
-
-
+class CompanyDetailsSerializer(ModelSerializer):
     
-    activity_profiles  = ActivityProfileSerializer(source='getActivities.activitie_profiles', many=True)
+    activity_profiles  = ActivityProfileSerializer(source='getActivities.activity_profiles', many=True)
     available_escape_game  = serializers.IntegerField(source='getActivities.total_activities')
     lowest_age  = serializers.IntegerField(source='getActivities.lowest_age')
     average_minimum_participant  = serializers.IntegerField(source='getActivities.average_minimum_participant')

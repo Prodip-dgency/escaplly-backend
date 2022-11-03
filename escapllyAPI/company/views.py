@@ -79,6 +79,7 @@ class CompanyDetailsViewsets(ViewSet):
                 }
             }
         }
+        print(repr(self))
         
 
         serializer = CompanyDetailsSerializer(queryset, many=True, context=context)

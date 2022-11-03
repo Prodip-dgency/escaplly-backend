@@ -89,7 +89,7 @@ class CompanyProfile(models.Model):
 
 
         values = {
-            "activitie_profiles": activity_profiles,
+            "activity_profiles": activity_profiles,
             "total_activities":total_activities,
             'lowest_age': lowest_age,
             'average_minimum_participant': average_minimum_participant,
@@ -97,7 +97,7 @@ class CompanyProfile(models.Model):
             'highest_accompany_age': highest_accompany_age,
             'average_game_duration': average_game_duration
         }
-
+        
         return values
 
 
