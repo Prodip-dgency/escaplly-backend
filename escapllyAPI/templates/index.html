@@ -55,6 +55,10 @@
             <td>gallery</td>
             <td><a href="{% url 'gallery:api-root' %}">{{ request.get_host }}{% url 'gallery:api-root' %}</a></td>
           </tr>
+          <tr>
+            <td>contact from</td>
+            <td><a href="{% url 'contactform:api-root' %}">{{ request.get_host }}{% url 'contactform:api-root' %}</a></td>
+          </tr>
         </tbody>
       </table>
     </div>
