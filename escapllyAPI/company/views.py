@@ -78,9 +78,7 @@ class CompanyDetailsViewsets(ViewSet):
                     'activity'
                 }
             }
-        }
-        print(repr(self))
-        
+        }     
 
         serializer = CompanyDetailsSerializer(queryset, many=True, context=context)
         return Response(serializer.data)

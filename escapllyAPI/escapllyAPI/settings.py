@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     'accounts',
     'gallery',
     'company',
-    'activity'
+    'activity',
+    'contactform'
 ]
 
 MIDDLEWARE = [
