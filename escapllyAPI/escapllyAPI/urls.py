@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import urls
+
 from . import settings
 
 from .views import home, HomeView
@@ -28,6 +30,9 @@ urlpatterns = [
     path('company/', include('company.urls')),
     path('activity/', include('activity.urls')),
     path('gallery/', include('gallery.urls')),
-    path('account/', include('accounts.urls')),
-    path('contact-from/', include('contactform.urls'))
+    path('accounts/', include('accounts.urls')),
+    path('contact-from/', include('contactform.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/', include('djoser.urls')),
+    path('api/v1/', include('djoser.urls.authtoken')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
