@@ -51,7 +51,9 @@ INSTALLED_APPS = [
 
     #Third Party Pacakages
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
+    'djoser',
 
     #My applications
     'accounts',
@@ -60,6 +62,16 @@ INSTALLED_APPS = [
     'activity',
     'contactform'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES' : [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -161,6 +173,8 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
 
 
 # Default primary key field type
