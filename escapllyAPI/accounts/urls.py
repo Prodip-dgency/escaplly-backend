@@ -13,6 +13,5 @@ router.register('user-profile', UserProfileViewsets, basename='user-profile')
 
 urlpatterns = [
     path('viewset/', include(router.urls)),
-    # path('', include('django.contrib.auth.urls')),
 ]
 
